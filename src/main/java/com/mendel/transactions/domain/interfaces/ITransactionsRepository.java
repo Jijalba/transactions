@@ -17,11 +17,18 @@ public interface ITransactionsRepository {
     Transaction get(Transaction transaction);
 
     /**
-     * Saves a transaction to the repository.
-     * @param transaction The transaction to save.
-     * @return The saved transaction, with an ID assigned by the repository.
+     * adds a transaction to the repository.
+     * @param transaction The transaction to add.
+     * @return The added transaction, with an ID assigned by the repository.
      */
-    Transaction save(Transaction transaction);
+    Transaction add(Transaction transaction);
+
+    /**
+     * updates a transaction to the repository.
+     * @param transaction The transaction to update.
+     * @return The updated transaction.
+     */
+    Transaction update(Transaction transaction);
 
     /**
      * Finds all transactions of a certain type.

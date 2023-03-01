@@ -1,6 +1,7 @@
 package com.mendel.transactions.domain.entities;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Transaction {
     private Long id;
@@ -38,5 +39,18 @@ public class Transaction {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

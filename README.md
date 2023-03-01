@@ -14,3 +14,4 @@ Day 2:
 - Wednesday 1:
     - Project Initialization.
     - Layers Creation.
+    - Implementations.

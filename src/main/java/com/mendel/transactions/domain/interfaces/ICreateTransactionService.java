@@ -8,7 +8,7 @@ import com.mendel.transactions.domain.entities.Transaction;
 public interface ICreateTransactionService {
 
     /**
-     * Execute method for the service.
+     * Execute method for the service
      * @param transaction The transaction to be created.
      * @return The created transaction.
      */

@@ -11,7 +11,7 @@ public interface IGetByTypeService {
 
     /**
      * Execute method for the service.
-     * @param type  The type of transactions to retrieve.
+     * @param type The type of transactions to retrieve.
      * @return The list of transactions with the specific type.
      */
     public List<Transaction> execute(String type);
