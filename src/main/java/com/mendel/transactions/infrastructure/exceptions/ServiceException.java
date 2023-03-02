@@ -1,16 +1,16 @@
 package com.mendel.transactions.infrastructure.exceptions;
 
 /**
- * Exception that is thrown when there is an error in the repository layer.
+ * Exception that is thrown when there is an error in the service layer.
  */
-public class RepositoryException extends RuntimeException {
+public class ServiceException extends RuntimeException {
 
     /**
-     * Constructs a new RepositoryException with the specified detail message.
+     * Constructs a new ServiceException with the specified detail message.
      *
      * @param message the detail message.
      */
-    public RepositoryException(String message) {
+    public ServiceException(String message) {
         super(message);
     }
 

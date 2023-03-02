@@ -14,6 +14,12 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
 
     private final List<Transaction> transactions = new CopyOnWriteArrayList<>();
 
+    /**
+     * Retrieves a transaction from the repository based on its ID.
+     *
+     * @param transaction The transaction containing the ID to retrieve.
+     * @return The transaction with the specified ID, or null if it does not exist.
+     */
     @Override
     public Transaction get(Transaction transaction) {
         return transactions.stream()
@@ -22,6 +28,12 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
                 .orElse(null);
     }
 
+    /**
+     * adds a transaction to the repository.
+     *
+     * @param transaction The transaction to add.
+     * @return The added transaction, with an ID assigned by the repository.
+     */
     @Override
     public Transaction add(Transaction transaction) throws RepositoryException {
         var existentTransaction = transactions.stream()
@@ -36,6 +48,12 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
         return transaction;
     }
 
+    /**
+     * updates a transaction to the repository.
+     *
+     * @param transaction The transaction to update.
+     * @return The updated transaction.
+     */
     @Override
     public Transaction update(Transaction transaction) throws RepositoryException {
         var index = transactions.indexOf(transaction);
@@ -47,6 +65,12 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
         return transaction;
     }
 
+    /**
+     * Finds all transactions of a certain type.
+     *
+     * @param type The type of transaction to find.
+     * @return A list of transactions of the specified type.
+     */
     @Override
     public List<Transaction> findByType(String type) {
         return transactions.stream()
@@ -54,10 +78,16 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Finds all transactions with a specific parent transaction ID.
+     *
+     * @param parentTransactionId The parent transaction ID to search for.
+     * @return A list of transactions with the specified parent transaction ID.
+     */
     @Override
-    public List<Transaction> findByParentId(Long parentId) {
+    public List<Transaction> findByParentId(Long parentTransactionId) {
         return transactions.stream()
-                .filter(t -> t.getParentId().equals(parentId))
+                .filter(t -> t.getParentId().equals(parentTransactionId))
                 .collect(Collectors.toList());
     }
 }

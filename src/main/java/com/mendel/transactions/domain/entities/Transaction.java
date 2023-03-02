@@ -41,6 +41,17 @@ public class Transaction {
         this.parentId = parentId;
     }
 
+    /**
+     * Simple integrity check for the required values.
+     *
+     * @return true if the received transaction is valid, false otherwise.
+     */
+    public boolean IsValid() {
+        return id != null &&
+                type != null &&
+                amount != null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

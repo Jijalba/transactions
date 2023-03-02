@@ -1,6 +1,7 @@
 package com.mendel.transactions.domain.interfaces;
 
 import com.mendel.transactions.domain.entities.Transaction;
+import com.mendel.transactions.infrastructure.exceptions.ServiceException;
 
 import java.util.List;
 
@@ -11,8 +12,9 @@ public interface IGetByTypeService {
 
     /**
      * Execute method for the service.
+     *
      * @param type The type of transactions to retrieve.
      * @return The list of transactions with the specific type.
      */
-    public List<Transaction> execute(String type);
+    public List<Transaction> execute(String type) throws ServiceException;
 }
