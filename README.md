@@ -23,6 +23,16 @@ Day 3:
     - Documentation
     - Added docker
 
+## In order to run this app:
+
+### execute:
+```
+docker build -t "transactions" .
+```
+```
+docker run -p 8080:8080 transactions:latest
+```
+
 For this challenge I followed the documentation of Java's good practices, and also used
 Clean Architecture and followed SOLID principles, Repository and Builder patterns and all the 
 knowledge and best practices that I could to avoid Code Smells.
