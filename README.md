@@ -15,3 +15,20 @@ Day 2:
     - Project Initialization.
     - Layers Creation.
     - Implementations.
+
+Day 3:
+- Thursday 2:
+    - Controller functionalities
+    - Tests
+    - Documentation
+    - Added docker
+
+For this challenge I followed the documentation of Java's good practices, and also used
+Clean Architecture and followed SOLID principles, Repository and Builder patterns and all the 
+knowledge and best practices that I could to avoid Code Smells.
+
+Some special topics:
+- I use the trailing "I" for interfaces to improve the legibility although is not a Java recommendation.
+- Tried to avoid Primitive Obsession and used Transactions to enter Repositories, but not for the find Methods as 
+they are a parameterized search.
+- I used docker in a Cloud Server I own
