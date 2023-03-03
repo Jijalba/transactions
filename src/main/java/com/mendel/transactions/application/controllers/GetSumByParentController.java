@@ -1,7 +1,6 @@
 package com.mendel.transactions.application.controllers;
 
 import com.mendel.transactions.domain.interfaces.IGetChildrenAmountService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,17 +26,13 @@ public class GetSumByParentController {
 
 
     /**
-     * Get the sum of all children transactions from a Parent Id.
+     * Get the sum of all children transactions from a Parent id.
      *
      * @param parentId The Parent id.
      * @return A map of "sum:amount"
      */
     @GetMapping("/{parentId}")
     public ResponseEntity<?> getSum(@PathVariable Long parentId) {
-
-        if (parentId == null)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You must provide a parent id.");
-
         return ResponseEntity.ok(Map.of("sum", getChildrenAmountService.execute(parentId)));
     }
 }

@@ -20,6 +20,7 @@ public class TransactionMapper {
 
     public static TransactionDTO toTransactionDTO(Transaction transaction) {
         return new TransactionDTOBuilder()
+
                 .withType(transaction.getType())
                 .withAmount(transaction.getAmount())
                 .withParentId(transaction.getParentId())

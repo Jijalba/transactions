@@ -3,8 +3,8 @@ package com.mendel.transactions.application.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendel.transactions.domain.entities.Transaction;
-import com.mendel.transactions.domain.entities.TransactionBuilder;
 import com.mendel.transactions.domain.interfaces.IGetByTypeService;
+import com.mendel.transactions.helper.TransactionCreator;
 import com.mendel.transactions.infrastructure.exceptions.ServiceException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,24 +38,7 @@ class GetByTypeControllerIntegrationTest {
 
     @Test
     void testOk() throws Exception {
-        var firstTransaction = new TransactionBuilder()
-                .withId(1L)
-                .withType(TEST_TYPE)
-                .build();
-        var secondTransaction = new TransactionBuilder()
-                .withId(2L)
-                .withType(TEST_TYPE)
-                .build();
-        var thirdTransaction = new TransactionBuilder()
-                .withId(3L)
-                .withType(TEST_TYPE)
-                .build();
-        var transactions = Arrays.asList(
-                firstTransaction,
-                secondTransaction,
-                thirdTransaction
-        );
-
+        var transactions = TransactionCreator.aTransactionList();
         when(getByTypeService.execute(TEST_TYPE)).thenReturn(transactions);
 
         var result = mockMvc.perform(get("/api/transactions/types/" + TEST_TYPE))

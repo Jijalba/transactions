@@ -51,15 +51,12 @@ public class TransactionController {
 
     /**
      * Gets a transaction with a specific id.
+     *
      * @param id The id to look for.
      * @return The list of transactions in the repository.
      */
     @GetMapping("/{id}")
     public ResponseEntity<?> getTransaction(@PathVariable Long id) {
-
-        if (id == null)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You must provide an id.");
-
         var transaction = new TransactionBuilder()
                 .withId(id)
                 .build();
@@ -74,6 +71,7 @@ public class TransactionController {
 
     /**
      * Creates a transaction.
+     *
      * @param transactionDTO The new transaction.
      * @return A Map of {id: newTransaction}.
      */
@@ -94,7 +92,8 @@ public class TransactionController {
 
     /**
      * Updates a transaction.
-     * @param id The id of the Transaction to be updated.
+     *
+     * @param id             The id of the Transaction to be updated.
      * @param transactionDTO The body to be updated.
      * @return A Map of {id: newTransaction}.
      */
@@ -103,7 +102,7 @@ public class TransactionController {
                                                @RequestBody TransactionDTO transactionDTO) {
 
         try {
-            var newTransaction = updateTransactionService.execute(TransactionMapper.toTransaction(id, transactionDTO));
+            updateTransactionService.execute(TransactionMapper.toTransaction(id, transactionDTO));
             return ResponseEntity.ok(Map.of("status", "ok"));
 
         } catch (ServiceException exception) {

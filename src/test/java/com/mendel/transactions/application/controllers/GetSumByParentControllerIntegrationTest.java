@@ -30,8 +30,6 @@ public class GetSumByParentControllerIntegrationTest {
 
     private static final Long PARENT_ID = 1L;
     private static final BigDecimal SUM = BigDecimal.valueOf(1);
-    private static final String ERROR_MESSAGE = "error message";
-
 
     @Test
     void testOk() throws Exception {
