@@ -11,6 +11,13 @@ import java.util.List;
 public interface ITransactionsRepository {
 
     /**
+     * Retrieves all transaction from the repository.
+     *
+     * @return The transactions.
+     */
+    List<Transaction> get();
+
+    /**
      * Retrieves a transaction from the repository based on its ID.
      *
      * @param transaction The transaction containing the ID to retrieve.

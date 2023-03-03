@@ -4,9 +4,14 @@ import com.mendel.transactions.domain.interfaces.IGetChildrenAmountService;
 import com.mendel.transactions.domain.interfaces.ITransactionsRepository;
 import com.mendel.transactions.infrastructure.exceptions.ServiceException;
 import com.mendel.transactions.domain.entities.Transaction;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+/**
+ * Service responsible for getting the sum amount of all transaction from a parent transaction.
+ */
+@Service
 public class GetChildrenAmountService implements IGetChildrenAmountService {
 
     private final ITransactionsRepository transactions;
@@ -23,9 +28,6 @@ public class GetChildrenAmountService implements IGetChildrenAmountService {
      */
     @Override
     public BigDecimal execute(Long parentTransactionId) throws ServiceException {
-        if (parentTransactionId == null)
-            throw new ServiceException("The Parent Id must not be null.");
-
         return transactions.findByParentId(parentTransactionId).stream()
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

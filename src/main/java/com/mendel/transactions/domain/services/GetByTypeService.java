@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service responsible for getting all the transaction with a specific type.
+ */
 @Service
 public class GetByTypeService implements IGetByTypeService {
 

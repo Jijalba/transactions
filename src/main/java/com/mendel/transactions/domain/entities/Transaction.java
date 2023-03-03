@@ -47,8 +47,7 @@ public class Transaction {
      * @return true if the received transaction is valid, false otherwise.
      */
     public boolean IsValid() {
-        return id != null &&
-                type != null &&
+        return type != null &&
                 amount != null;
     }
 

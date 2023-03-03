@@ -1,6 +1,7 @@
 package com.mendel.transactions.infrastructure.dataaccess;
 
 import com.mendel.transactions.domain.entities.Transaction;
+import com.mendel.transactions.domain.entities.TransactionBuilder;
 import com.mendel.transactions.domain.interfaces.ITransactionsRepository;
 import com.mendel.transactions.infrastructure.exceptions.RepositoryException;
 import org.springframework.stereotype.Repository;
@@ -9,10 +10,23 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Memory Repository for transactions.
+ */
 @Repository
 public class MemoryTransactionRepository implements ITransactionsRepository {
 
     private final List<Transaction> transactions = new CopyOnWriteArrayList<>();
+
+    /**
+     * Retrieves all transaction from the repository.
+     *
+     * @return The transactions.
+     */
+    @Override
+    public List<Transaction> get() {
+        return transactions;
+    }
 
     /**
      * Retrieves a transaction from the repository based on its ID.
@@ -36,16 +50,21 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
      */
     @Override
     public Transaction add(Transaction transaction) throws RepositoryException {
-        var existentTransaction = transactions.stream()
-                .filter(t -> t.getId().equals(transaction.getId()))
-                .findFirst()
-                .orElse(null);
 
-        if (existentTransaction != null)
-            throw new RepositoryException("The transaction already exists in the repository.");
+        var maxId = transactions.stream()
+                .map(Transaction::getId)
+                .max(Long::compareTo)
+                .orElse(0L);
 
-        transactions.add(transaction);
-        return transaction;
+        var newTransaction = new TransactionBuilder()
+                .withId(maxId + 1)
+                .withAmount(transaction.getAmount())
+                .withType(transaction.getType())
+                .withParentId(transaction.getParentId())
+                .build();
+
+        transactions.add(newTransaction);
+        return newTransaction;
     }
 
     /**
@@ -87,6 +106,7 @@ public class MemoryTransactionRepository implements ITransactionsRepository {
     @Override
     public List<Transaction> findByParentId(Long parentTransactionId) {
         return transactions.stream()
+                .filter(t -> t.getParentId() != null)
                 .filter(t -> t.getParentId().equals(parentTransactionId))
                 .collect(Collectors.toList());
     }

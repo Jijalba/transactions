@@ -6,9 +6,8 @@ public class TransactionBuilder {
 
     private Transaction transaction;
 
-    public TransactionBuilder Builder() {
-        transaction = new Transaction();
-        return this;
+    public TransactionBuilder() {
+        this.transaction = new Transaction();
     }
 
     public TransactionBuilder withId(Long id) {
@@ -31,7 +30,7 @@ public class TransactionBuilder {
         return this;
     }
 
-    public Transaction Build() {
+    public Transaction build() {
         return transaction;
     }
 }
