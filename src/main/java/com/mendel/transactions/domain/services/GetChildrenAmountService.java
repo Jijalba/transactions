@@ -27,7 +27,7 @@ public class GetChildrenAmountService implements IGetChildrenAmountService {
      * @return The sum of all amounts of children.
      */
     @Override
-    public BigDecimal execute(Long parentTransactionId) throws ServiceException {
+    public BigDecimal execute(Long parentTransactionId) {
         return transactions.findByParentId(parentTransactionId).stream()
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

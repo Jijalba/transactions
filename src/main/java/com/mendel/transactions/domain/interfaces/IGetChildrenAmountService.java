@@ -15,5 +15,5 @@ public interface IGetChildrenAmountService {
      * @param parentTransactionId The Transaction ID from the parent to retrieve.
      * @return The sum of all amounts of children.
      */
-    public BigDecimal execute(Long parentTransactionId) throws ServiceException;
+    public BigDecimal execute(Long parentTransactionId);
 }

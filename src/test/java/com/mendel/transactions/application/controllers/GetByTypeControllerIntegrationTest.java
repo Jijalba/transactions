@@ -35,7 +35,7 @@ class GetByTypeControllerIntegrationTest {
     private IGetByTypeService getByTypeService;
 
     private static final String TEST_TYPE = "test";
-    private static final String ERROR_MESSAGE = "Invalid type";
+    private static final String ERROR_MESSAGE = "error message";
 
     @Test
     void testOk() throws Exception {
@@ -90,12 +90,10 @@ class GetByTypeControllerIntegrationTest {
 
         when(getByTypeService.execute(TEST_TYPE)).thenThrow(new ServiceException(ERROR_MESSAGE));
 
-        // Act
         MvcResult result = mockMvc.perform(get("/api/transactions/types/" + TEST_TYPE))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
-        // Assert
         Assertions.assertEquals(ERROR_MESSAGE, result.getResponse().getContentAsString());
     }
 }
